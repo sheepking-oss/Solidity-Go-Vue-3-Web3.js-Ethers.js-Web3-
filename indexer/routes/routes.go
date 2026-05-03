@@ -25,7 +25,11 @@ func SetupRouter() *gin.Engine {
 		admin := api.Group("/admin")
 		{
 			admin.GET("/sync-status", handlers.GetSyncStatus)
+			admin.GET("/fork-events", handlers.GetForkEvents)
 			admin.GET("/reorg-events", handlers.GetReorgEvents)
+			admin.GET("/orphaned-blocks", handlers.GetOrphanedBlocks)
+			admin.GET("/canonical-blocks", handlers.GetCanonicalBlocks)
+			admin.GET("/checkpoints", handlers.GetCheckpoints)
 			admin.GET("/blocks", handlers.GetBlockRecords)
 		}
 	}

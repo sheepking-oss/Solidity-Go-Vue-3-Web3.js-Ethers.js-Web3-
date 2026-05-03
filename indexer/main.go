@@ -22,9 +22,9 @@ func main() {
 		log.Fatalf("Failed to initialize database: %v", err)
 	}
 
-	indexer, err := ethereum.NewIndexer(cfg)
+	indexer, err := ethereum.NewEnhancedIndexer(cfg)
 	if err != nil {
-		log.Fatalf("Failed to create indexer: %v", err)
+		log.Fatalf("Failed to create enhanced indexer: %v", err)
 	}
 
 	handlers.SetIndexerStatus(indexer)
