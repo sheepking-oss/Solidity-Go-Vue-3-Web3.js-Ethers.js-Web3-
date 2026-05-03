@@ -11,6 +11,7 @@ import (
 	"supply-chain-indexer/config"
 	"supply-chain-indexer/database"
 	"supply-chain-indexer/ethereum"
+	"supply-chain-indexer/handlers"
 	"supply-chain-indexer/routes"
 )
 
@@ -25,6 +26,8 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to create indexer: %v", err)
 	}
+
+	handlers.SetIndexerStatus(indexer)
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
