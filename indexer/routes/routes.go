@@ -21,6 +21,13 @@ func SetupRouter() *gin.Engine {
 			products.GET("/hash/:hash", handlers.GetProductByHash)
 			products.GET("", handlers.GetAllProducts)
 		}
+
+		admin := api.Group("/admin")
+		{
+			admin.GET("/sync-status", handlers.GetSyncStatus)
+			admin.GET("/reorg-events", handlers.GetReorgEvents)
+			admin.GET("/blocks", handlers.GetBlockRecords)
+		}
 	}
 
 	return router

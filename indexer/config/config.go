@@ -19,6 +19,8 @@ type Config struct {
 	DBSSLMode         string
 	ServerPort        int
 	StartBlock        uint64
+	BlockConfirmations uint64
+	ReorgCheckInterval int
 }
 
 func LoadConfig() *Config {
@@ -29,18 +31,22 @@ func LoadConfig() *Config {
 	dbPort, _ := strconv.Atoi(getEnv("DB_PORT", "5432"))
 	serverPort, _ := strconv.Atoi(getEnv("SERVER_PORT", "8080"))
 	startBlock, _ := strconv.ParseUint(getEnv("START_BLOCK", "0"), 10, 64)
+	blockConfirmations, _ := strconv.ParseUint(getEnv("BLOCK_CONFIRMATIONS", "6"), 10, 64)
+	reorgCheckInterval, _ := strconv.Atoi(getEnv("REORG_CHECK_INTERVAL", "15"))
 
 	return &Config{
-		EthRPCURL:       getEnv("ETH_RPC_URL", "http://localhost:8545"),
-		ContractAddress: getEnv("CONTRACT_ADDRESS", ""),
-		DBHost:          getEnv("DB_HOST", "localhost"),
-		DBPort:          dbPort,
-		DBUser:          getEnv("DB_USER", "postgres"),
-		DBPassword:      getEnv("DB_PASSWORD", ""),
-		DBName:          getEnv("DB_NAME", "supply_chain"),
-		DBSSLMode:       getEnv("DB_SSL_MODE", "disable"),
-		ServerPort:      serverPort,
-		StartBlock:      startBlock,
+		EthRPCURL:          getEnv("ETH_RPC_URL", "http://localhost:8545"),
+		ContractAddress:    getEnv("CONTRACT_ADDRESS", ""),
+		DBHost:             getEnv("DB_HOST", "localhost"),
+		DBPort:             dbPort,
+		DBUser:             getEnv("DB_USER", "postgres"),
+		DBPassword:         getEnv("DB_PASSWORD", ""),
+		DBName:             getEnv("DB_NAME", "supply_chain"),
+		DBSSLMode:          getEnv("DB_SSL_MODE", "disable"),
+		ServerPort:         serverPort,
+		StartBlock:         startBlock,
+		BlockConfirmations: blockConfirmations,
+		ReorgCheckInterval: reorgCheckInterval,
 	}
 }
 
